@@ -4,6 +4,10 @@ nextPower = 2
 clickPowerCost = 10
 nextCost = 18
 energyPerSecond = 0
+plants = [0, 0, 0, 0, 0]
+costs = [100, 1000, 10000, 100000, 1000000] // These three lines (costs, cps, upgCosts) are not final, adjust as needed
+cps = [1, 10, 100, 1000, 10000]
+upgCosts = [2000, 20000, 200000, 2000000, 20000000]
 function getEnergy() {
     energy += clickPower
     document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
@@ -14,10 +18,10 @@ function increaseClickPower() {
         Math.round(clickPowerCost)
         Math.round(clickPower)
         clickPower = nextPower
-        nextPower *= 1.4 // adjust as needed
+        nextPower *= 1.4 // adjust as needed, needs to be at least 1.25
         Math.round(nextPower)
         clickPowerCost = nextCost
-        nextCost *= 1.9 // adjust as needed
+        nextCost *= 1.9 // adjust as needed, the higher nextCost - nextPower, the less effective clicking upgrades are, but this works for now
         Math.round(nextCost)
         clickPower = Number(clickPower.toFixed(0))
         clickPowerCost = Number(clickPowerCost.toFixed(0))
@@ -27,5 +31,8 @@ function increaseClickPower() {
     document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
 }
 function buy(n) {
+    // to fill in
+}
+function upg(n) {
     // to fill in
 }
