@@ -31,8 +31,20 @@ function increaseClickPower() {
     document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
 }
 function buy(n) {
-    // to fill in
+    if (energy >= costs[n]) {
+        energy -= costs[n]
+        plants[n] += 1
+        editCPS()
+    }
 }
 function upg(n) {
     // to fill in
+}
+function editCPS() {
+    energyPerSecond = 0
+    for (i = 0; i < plants.length; i++) {
+        energyPerSecond += (plants[i] * cps[i])
+    }
+    document.getElementsByClassName('energypersecond')[0].innerHTML = `${energyPerSecond} joules/second`
+    document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
 }
