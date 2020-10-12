@@ -1,4 +1,4 @@
-energy = 0
+energy = 1000
 clickPower = 1
 nextPower = 2
 clickPowerCost = 10
@@ -8,6 +8,15 @@ plants = [0, 0, 0, 0, 0]
 costs = [100, 1000, 10000, 100000, 1000000] // These three lines (costs, cps, upgCosts) are not final, adjust as needed
 cps = [1, 10, 100, 1000, 10000]
 upgCosts = [2000, 20000, 200000, 2000000, 20000000]
+
+startGame()
+function addEPS() {
+    console.log('cps')
+    energy += energyPerSecond
+    editCPS()
+    document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
+    setTimeout(addEPS, 1000)
+}
 function getEnergy() {
     energy += clickPower
     document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
@@ -38,7 +47,12 @@ function buy(n) {
     }
 }
 function upg(n) {
-    // to fill in
+    if (energy >= upgCosts[n]) {
+        energy -= upgCosts[n]
+        cps[n] *= 2
+        upgCosts[n] *= 2
+        editCPS()
+    }
 }
 function editCPS() {
     energyPerSecond = 0
@@ -47,4 +61,12 @@ function editCPS() {
     }
     document.getElementsByClassName('energypersecond')[0].innerHTML = `${energyPerSecond} joules/second`
     document.getElementsByClassName('energyscore')[0].innerHTML = `${energy} joules`
+}
+function sleep(miliseconds) {
+    var currentTime = new Date().getTime();
+    while (currentTime + miliseconds >= new Date().getTime()) {
+    }
+}
+function startGame() {
+    setInterval(addEPS(), 1000);
 }
